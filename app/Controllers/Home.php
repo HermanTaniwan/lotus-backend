@@ -31,8 +31,41 @@ class Home extends BaseController
 
         echo json_encode($final);
         exit();
+    }
+
+    public function loadRecipe()
+    {
+
+        $request = \Config\Services::request();
+        $ingredients = $request->getGet('ingredients');
+        $listIngredient = explode(' ', $ingredients);
+
+        $page = $request->getGet('page');
+        $limit = $request->getGet('limit');
+        $offset = $page * $limit;
+
+
+        $db = \Config\Database::connect();
+        $strquery  = 'SELECT r.*,a.name as "artist_name", a.image as "artist_image" FROM recipe r LEFT JOIN artist a ON r.artist_id = a.id';
+        if ($ingredients != "") {
+            $strquery .= ' WHERE MATCH (instructions) AGAINST ("' . $ingredients . '" IN BOOLEAN MODE)';
+            $strquery .= ' ORDER BY MATCH (instructions) AGAINST ("' . $ingredients . '" IN BOOLEAN MODE) DESC';
+        } else {
+            $strquery .= ' ORDER BY r.id DESC';
+        }
+        $strquery .= ' LIMIT ' . $limit . ' OFFSET ' . $offset;
+        $query = $db->query($strquery);
+        $results = $query->getResult();
+        foreach ($results as $row) {
+            $row->artist_image = 'https://quarks.id/food-recom-cms/asset/images/artist/' . $row->artist_image;
+        }
+
         // echo "<pre>";
-        // var_dump($final);
+        // var_dump($results);
         // echo "</pre>";
+        // exit();
+
+        echo json_encode($results);
+        exit();
     }
 }
