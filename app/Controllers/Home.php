@@ -9,17 +9,24 @@ class Home extends BaseController
         return view('welcome_message');
     }
 
-    public function loadDB()
+    public function loadIngredients()
     {
         $db = \Config\Database::connect();
-        $query   = $db->query('SELECT name, id FROM test');
+        $query   = $db->query('SELECT name, id FROM ingredients_category');
         $results = $query->getResult();
-
+        $final = array();
         foreach ($results as $row) {
-            echo $row->name;
-            echo $row->id;
+            $q   = $db->query('SELECT * FROM ingredients where category_id =' . $row->id);
+            $listIngredient = $q->getResult();
+            $ingredients = array();
+            $ingredients[$row->name] = $listIngredient;
+            array_push($final, $ingredients);
         }
 
-        echo 'Total Results: ' . count($results);
+        echo json_encode($final);
+        exit();
+        // echo "<pre>";
+        // var_dump($final);
+        // echo "</pre>";
     }
 }

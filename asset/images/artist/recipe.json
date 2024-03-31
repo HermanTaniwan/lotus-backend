@@ -1,0 +1,33 @@
+ [
+  {
+    "recipe_id": "10230",
+    "recipe_name": "Steak Ayam",
+    "component": [
+      {
+        "name": "sauce",
+        "measurement": [
+          {
+            "ingredient_id": "bawang-putih",
+            "qty": "1",
+            "unit": "sdm"
+          },
+          {
+            "ingredient_id": "air",
+            "qty": "220",
+            "unit": "ml"
+          }
+        ]
+      },
+      {
+        "name": "steak",
+        "measurement": [
+          {
+            "ingredient_id": "daging-ayam",
+            "qty": "1",
+            "unit": "pcs"
+          }
+        ]
+      }
+    ]
+  }
+]
