@@ -17,9 +17,15 @@ class Home extends BaseController
         $final = array();
         foreach ($results as $row) {
             $q   = $db->query('SELECT * FROM ingredients where category_id =' . $row->id);
+
             $listIngredient = $q->getResult();
+            foreach ($listIngredient as $l) {
+                $l->{'category_name'} = $row->name;
+            }
             $ingredients = array();
-            $ingredients[$row->name] = $listIngredient;
+            $ingredients['id'] = $row->id;
+            $ingredients['name'] = $row->name;
+            $ingredients['ingredients'] = $listIngredient;
             array_push($final, $ingredients);
         }
 
