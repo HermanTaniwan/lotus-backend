@@ -1,0 +1,5 @@
+---
+deployment:
+tasks:
+  - export DEPLOYPATH=/home/quas6848/public_html/food-recom-cms
+  - /bin/cp -r * $DEPLOYPATH
