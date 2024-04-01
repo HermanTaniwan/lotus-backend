@@ -71,10 +71,10 @@ class Home extends BaseController
             $row->artist_image = 'https://quarks.id/food-recom-cms/asset/images/artist/' . $row->artist_image;
         }
 
-        echo "<pre>";
-        var_dump($results);
-        echo "</pre>";
-        exit();
+        // echo "<pre>";
+        // var_dump($results);
+        // echo "</pre>";
+        // exit();
 
         echo json_encode($results);
         exit();
