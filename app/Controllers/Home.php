@@ -42,28 +42,34 @@ class Home extends BaseController
 
         $page = $request->getGet('page');
         $limit = $request->getGet('limit');
-        $offset = $page * $limit;
+        $offset = intval($page) * intval($limit);
 
 
         $db = \Config\Database::connect();
-        $strquery  = 'SELECT r.*,a.name as "artist_name", a.image as "artist_image" FROM recipe r LEFT JOIN artist a ON r.artist_id = a.id';
+        $builder = $db->table('recipe');
+        $builder->select('recipe.*, artist.image as "artist_image", artist.name as "artist_name"');
+        $builder->join('artist', 'artist.id = recipe.artist_id', 'left');
+
+
         if ($ingredients != "") {
-            $strquery .= ' WHERE MATCH (instructions) AGAINST ("' . $ingredients . '" IN BOOLEAN MODE)';
-            $strquery .= ' ORDER BY MATCH (instructions) AGAINST ("' . $ingredients . '" IN BOOLEAN MODE) DESC';
+            $matchQuery = 'MATCH (instructions) AGAINST ("' . $ingredients . '" IN BOOLEAN MODE)';
+            $builder->where($matchQuery);
+            $builder->orderBy($matchQuery, 'DESC');
         } else {
-            $strquery .= ' ORDER BY r.id DESC';
+            $builder->orderBy('recipe.id', 'DESC');
         }
-        $strquery .= ' LIMIT ' . $limit . ' OFFSET ' . $offset;
-        $query = $db->query($strquery);
-        $results = $query->getResult();
-        foreach ($results as $row) {
-            $row->artist_image = 'https://quarks.id/food-recom-cms/asset/images/artist/' . $row->artist_image;
-        }
+
+        $results = $builder->get($limit, $offset)->getResult();
+
 
         // echo "<pre>";
         // var_dump($results);
         // echo "</pre>";
         // exit();
+        foreach ($results as $row) {
+            $row->artist_image = 'https://quarks.id/food-recom-cms/asset/images/artist/' . $row->artist_image;
+        }
+
 
         echo json_encode($results);
         exit();
