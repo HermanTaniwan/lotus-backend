@@ -74,4 +74,20 @@ class Home extends BaseController
         echo json_encode($results);
         exit();
     }
+
+    public function searchRecipe()
+    {
+        $request = \Config\Services::request();
+        $keywords = $request->getGet('keywords');
+        $db = \Config\Database::connect();
+        $builder = $db->table('recipe');
+        $builder->select('recipe.*, artist.image as "artist_image", artist.name as "artist_name"');
+        $builder->join('artist', 'artist.id = recipe.artist_id', 'left');
+        $matchQuery = 'MATCH (recipe.name) AGAINST ("' . $keywords . '" IN BOOLEAN MODE)';
+        $builder->where($matchQuery);
+        $builder->orderBy($matchQuery, 'DESC');
+        $results = $builder->get(10, 0)->getResult();
+        echo json_encode($results);
+        exit();
+    }
 }
