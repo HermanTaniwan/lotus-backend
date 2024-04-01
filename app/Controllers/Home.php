@@ -38,7 +38,7 @@ class Home extends BaseController
 
         $request = \Config\Services::request();
         $ingredients = $request->getGet('ingredients');
-        $listIngredient = explode(' ', $ingredients);
+        $keywords = $request->getGet('keywords');
 
         $page = $request->getGet('page');
         $limit = $request->getGet('limit');
@@ -50,9 +50,15 @@ class Home extends BaseController
         $builder->select('recipe.*, artist.image as "artist_image", artist.name as "artist_name"');
         $builder->join('artist', 'artist.id = recipe.artist_id', 'left');
 
-
+        $matchQuery = "";
         if ($ingredients != "") {
             $matchQuery = 'MATCH (instructions) AGAINST ("' . $ingredients . '" IN BOOLEAN MODE)';
+        } else if ($keywords != "") {
+
+            $matchQuery = 'MATCH (recipe.name) AGAINST ("' . $keywords . '" IN BOOLEAN MODE)';
+        }
+
+        if ($matchQuery != "") {
             $builder->where($matchQuery);
             $builder->orderBy($matchQuery, 'DESC');
         } else {
@@ -61,15 +67,14 @@ class Home extends BaseController
 
         $results = $builder->get($limit, $offset)->getResult();
 
-
-        // echo "<pre>";
-        // var_dump($results);
-        // echo "</pre>";
-        // exit();
         foreach ($results as $row) {
             $row->artist_image = 'https://quarks.id/food-recom-cms/asset/images/artist/' . $row->artist_image;
         }
 
+        echo "<pre>";
+        var_dump($results);
+        echo "</pre>";
+        exit();
 
         echo json_encode($results);
         exit();
