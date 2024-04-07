@@ -1,0 +1,54 @@
+<footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="<?= base_url(); ?>asset/plugins/sliptree-bootstrap-tokenfield-v0.12.1/sliptree-bootstrap-tokenfield-ff5b929/dist/bootstrap-tokenfield.min.js"></script>
+    <!-- <script src="<?= base_url(); ?>" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script> -->
+
+    <script>
+        $(function() {
+            $(".alert").delay(2000).slideUp(300)
+            $('.artist-selector').change((function() {
+                // alert($(this).val());
+                window.location.replace("<?= base_url(); ?>recipe-library?&artist_id=" + $(this).val());
+            }))
+
+            var datasource = [];
+            $.getJSON("<?= base_url(); ?>all-ingredients", function(data) {
+                console.log(data);
+                $.each(data, function(key, val) {
+                    datasource.push(val.ingredient_id);
+                });
+
+                $('#tokenfield').on('tokenfield:createdtoken', function(e) {
+                    console.log(e.attrs.value);
+                    var valid = datasource.includes((e.attrs.value))
+                    if (!valid) {
+                        $(e.relatedTarget).addClass('invalid')
+                    }
+                })
+
+                $('#tokenfield').tokenfield({
+                    autocomplete: {
+                        source: datasource,
+                        delay: 100
+                    },
+                    showAutocompleteOnFocus: true,
+                    delimiter: [' ']
+                });
+
+            });
+
+            // var datasource = ['bawang-putih', 'bawang-merah', 'daging-ayam', 'serai'];
+
+
+
+
+        });
+    </script>
+
+</footer>

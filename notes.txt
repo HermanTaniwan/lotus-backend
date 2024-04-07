@@ -1,0 +1,23 @@
+SELECT y.artist_id, a.name, count(y.id) as count_videos FROM youtube y left join artist a on a.id = y.artist_id group by y.artist_id
+
+Video yang sudah habis di crawl
+Will Goz
+Luvita
+Martin Praja
+Dapur Neny
+Jerry Andrean
+Nanang Kitchen
+CeceRomed 
+Lisa Hwang
+Diizah Kitchen
+Sajian Bunda
+IndoCulinaire Hunter
+Devina Hermawan
+Ade Koerniawan
+CR Cook
+Dapur Dina
+Mbok Midut
+Rudy dan Sahabat TV
+Simple Rudy TV
+Tri Puji
+Yongki Gunawan
