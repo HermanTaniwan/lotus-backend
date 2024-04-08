@@ -17,9 +17,14 @@
                 window.location.replace("<?= base_url(); ?>recipe-library?&artist_id=" + $(this).val());
             }))
 
+
+
+
+
+
+
             var datasource = [];
             $.getJSON("<?= base_url(); ?>all-ingredients", function(data) {
-                console.log(data);
                 $.each(data, function(key, val) {
                     datasource.push(val.ingredient_id);
                 });
@@ -43,9 +48,35 @@
 
             });
 
-            // var datasource = ['bawang-putih', 'bawang-merah', 'daging-ayam', 'serai'];
 
 
+            $('.get-ingredient-btn').click(function() {
+                console.log('execute');
+                $('.ingredients').tokenfield('destroy');
+                input = $('.raw-ingredient').val().toLowerCase().trim();
+                arr_str = input.split(/\n/);
+                str = ""
+                stopwords = ['-', 'gram', 'sdm', 'kg', 'sdt', 'liter', 'utuh', 'siung', 'ruas', 'jari', 'air', 'potong', 'butir', 'untuk', 'baluran', 'menggoreng', 'ml', 'larutan', 'dan', 'bisa', 'di', 'tambahkan', 'ke', 'adonan', 'gr', 'cm', 'pcs', 'taburan', 'pack', 'pak', 'setengah', 'resep', 'cubit', 'genggam', 'cincang', 'cuci', 'bersih', 'boleh', 'lembar', 'secukupnya', 'buah', 'batang', 'menumis', 'lempeng', 'ekor', 'geprek', 'jempol', 'telunjuk', 'sangrai', 'bagi', 'ukuran']
+                arr_str.forEach(function(item, index, arr) {
+                    item = item.replace(/  +/g, '').replace(/\s\s+/g, '').replace(/•|-|—/g, '').replace(/[0-9]/g, "").replace(/\//g, ' ').replace(/&/g, "").replace(/,/g, "").replace(/\+/g, "").replace(/ *\([^)]*\) */g, "").replace(":", "").trim();
+                    item = item.replace(new RegExp('\\b(' + stopwords.join('|') + ')\\b', 'g'), '').trim();
+                    item = item.replace('sereh', 'serai').replace('gula-pasir', 'gula').replace('cabai', 'cabe').replace('saos', 'saus').replace('merica', 'lada').replace('minyak-zaitun', 'olive-oil').replace('chili-powder', 'bubuk-cabe')
+                    item = item.split(' ').join('-').trim()
+                    item = item.replace('---', ' ')
+                    str += item + " "
+                })
+                str = str.trim();
+                $('.ingredients').val(str)
+
+                $('.ingredients').tokenfield({
+                    autocomplete: {
+                        source: datasource,
+                        delay: 100
+                    },
+                    showAutocompleteOnFocus: true,
+                    delimiter: [' ']
+                });
+            });
 
 
         });

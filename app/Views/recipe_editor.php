@@ -48,19 +48,13 @@
 
                 <div class=" card p-3 col-5 m-1">
                     <form action="<?= base_url() . 'recipe-submit' ?>" method="post" accept-charset="utf-8">
+                        <input type="hidden" name="artist_id" value="<?= $published->artist_id ?>" />
                         <input type="hidden" name="video_id" value="<?= $published->video_id ?>" class="form-control btn btn-primary" />
                         <div class="row">
                             <div class="col-9">
                                 <h3>PUBLISHED</h3>
                             </div>
-                            <div class="col-3">
-                                <div class="form-group row">
-                                    <label for="inputDescription" class="col-sm-2 col-form-label"></label>
-                                    <div class="col-sm-10">
-                                        <input type="submit" value="submit" class="form-control btn btn-primary" />
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
 
                         <br>
@@ -100,11 +94,27 @@
                         </div>
                         <br>
                         <div class="form-group row">
+                            <label for="inputIngredient" class="col-sm-2 col-form-label">Raw Ingredient</label>
+                            <div class="col-sm-10">
+                                <textarea class="raw-ingredient form-control" name="" id="" cols="30" rows="10"></textarea>
+                                <input class="get-ingredient-btn" type="button" value="Get Ingredient" />
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row">
                             <label for="inputIngredient" class="col-sm-2 col-form-label">Ingredient</label>
                             <div class="col-sm-10">
 
-                                <input type="text" class="form-control" name="ingredients" id="tokenfield" value="<?= $published->ingredients ?>" />
+                                <input type="text" class="form-control ingredients" name="ingredients" id="tokenfield" value="<?= $published->ingredients ?>" />
 
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="form-group row">
+                            <label for="inputDescription" class="col-sm-2 col-form-label"></label>
+                            <div class="col-sm-10">
+                                <input type="submit" value="submit" class="form-control btn btn-primary" />
                             </div>
                         </div>
                         <br>

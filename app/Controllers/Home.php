@@ -208,6 +208,28 @@ class Home extends BaseController
         // $content['channel']['videos'][0]['items'][0]['id'];
     }
 
+    function searchRecipeNLP()
+    {
+        $request = \Config\Services::request();
+        $keywords = $request->getGet('keywords');
+        if ($keywords == "") exit('No keywords found');
+        $db = \Config\Database::connect();
+        $builder = $db->table('recipe');
+        $builder->select('recipe.name, recipe.instructions');
+        $builder->select('MATCH(recipe.name) AGAINST ("' . $keywords . '" IN NATURAL LANGUAGE MODE) as score_name');
+        $builder->select('MATCH(recipe.instructions) AGAINST ("' . $keywords . '" IN NATURAL LANGUAGE MODE)  as score_instructions');
+        $builder->select('(MATCH(recipe.name) AGAINST ("' . $keywords . '" IN NATURAL LANGUAGE MODE) * MATCH(recipe.instructions) AGAINST ("' . $keywords . '" IN NATURAL LANGUAGE MODE)) as full_score');
+        $builder->join('artist', 'artist.id = recipe.artist_id', 'left');
+        // $builder->where($matchQuery);
+        $builder->orderBy('full_score', 'DESC');
+        $results = $builder->get(10, 0)->getResult();
+        echo "<pre>";
+        var_dump($results);
+        echo json_encode($results);
+        echo "</pre>";
+        exit();
+    }
+
 
     function generateRandomString($length = 10)
     {
