@@ -5,3 +5,8 @@
 *.tgz
 *.sublime-project
 *.sublime-workspace
+docs-assets
+less
+tests
+.npmignore
+.travis.yml
