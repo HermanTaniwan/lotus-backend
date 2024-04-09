@@ -17,12 +17,6 @@
                 window.location.replace("<?= base_url(); ?>recipe-library?&artist_id=" + $(this).val());
             }))
 
-
-
-
-
-
-
             var datasource = [];
             $.getJSON("<?= base_url(); ?>all-ingredients", function(data) {
                 $.each(data, function(key, val) {
@@ -48,15 +42,17 @@
 
             });
 
-
-
             $('.get-ingredient-btn').click(function() {
                 console.log('execute');
                 $('.ingredients').tokenfield('destroy');
                 input = $('.raw-ingredient').val().toLowerCase().trim();
                 arr_str = input.split(/\n/);
                 str = ""
-                stopwords = ['-', 'gram', 'sdm', 'kg', 'sdt', 'liter', 'utuh', 'siung', 'ruas', 'jari', 'air', 'potong', 'butir', 'untuk', 'baluran', 'menggoreng', 'ml', 'larutan', 'dan', 'bisa', 'di', 'tambahkan', 'ke', 'adonan', 'gr', 'cm', 'pcs', 'taburan', 'pack', 'pak', 'setengah', 'resep', 'cubit', 'genggam', 'cincang', 'cuci', 'bersih', 'boleh', 'lembar', 'secukupnya', 'buah', 'batang', 'menumis', 'lempeng', 'ekor', 'geprek', 'jempol', 'telunjuk', 'sangrai', 'bagi', 'ukuran']
+                units = ['gram', 'sdm', 'kg', 'sdt', 'liter', 'ruas', 'jari', 'potong', 'butir', 'ml', 'gr', 'cm', 'pcs', 'pack', 'pak', 'lembar', 'buah', 'batang', 'lempeng', 'ekor', 'jempol', 'telunjuk']
+                garbage = ['-', 'utuh', 'siung', 'air', , 'untuk', 'baluran', 'menggoreng', 'larutan', 'dan', 'bisa', 'di', 'tambahkan', 'ke', 'adonan', 'taburan', 'setengah',
+                    'resep', 'cubit', 'genggam', 'cincang', 'cuci', 'bersih', 'boleh', 'secukupnya', 'menumis', 'geprek', 'sangrai', 'bagi', 'ukuran'
+                ]
+                stopwords = units.concat(garbage);
                 arr_str.forEach(function(item, index, arr) {
                     item = item.replace(/  +/g, '').replace(/\s\s+/g, '').replace(/•|-|—/g, '').replace(/[0-9]/g, "").replace(/\//g, ' ').replace(/&/g, "").replace(/,/g, "").replace(/\+/g, "").replace(/ *\([^)]*\) */g, "").replace(":", "").trim();
                     item = item.replace(new RegExp('\\b(' + stopwords.join('|') + ')\\b', 'g'), '').trim();

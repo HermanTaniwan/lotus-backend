@@ -17,21 +17,22 @@
             <br>
             <div class="row">
                 <div class=" card p-3 col-5 ">
-                    <form>
+                    <form action="<?= base_url() . 'recipe-youtube-submit' ?>" method="post" accept-charset="utf-8">
+                        <input type="hidden" name="video_id" value="<?= $published->video_id ?>" class="form-control btn btn-primary" />
                         <h3>ORIGINAL</h3>
                         <br>
-                        <div class="form-group row">
+                        <div class=" form-group row">
 
                             <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" name="title" id="inputTitle" rows="3" readonly><?= $original->title ?></textarea>
+                                <textarea class="form-control" name="title" id="inputTitle" rows="3"><?= $original->title ?></textarea>
                             </div>
                         </div>
                         <br>
                         <div class="form-group row">
                             <label for="inputDescription" class="col-sm-2 col-form-label">Description</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" name="description" id="inputDescription" rows="30" readonly><?= $original->description ?></textarea>
+                                <textarea class="form-control" name="description" id="inputDescription" rows="30"><?= $original->description ?></textarea>
                             </div>
                         </div>
                         <br>
@@ -40,6 +41,12 @@
                             <div class="col-sm-10">
                                 <iframe width="100%" height="315" src="https://www.youtube.com/embed/<?= $original->video_id ?>">
                                 </iframe>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputDescription" class="col-sm-2 col-form-label"></label>
+                            <div class="col-sm-10">
+                                <input type="submit" value="submit" class="form-control btn btn-primary" />
                             </div>
                         </div>
                     </form>

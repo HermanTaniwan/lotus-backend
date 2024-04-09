@@ -129,12 +129,37 @@ class RecipeLibraryController extends BaseController
         return redirect()->to('recipe-editor?video_id=' . $submitted['video_id']);
     }
 
+    public function submitRecipeYT()
+    {
+        $request = \Config\Services::request();
+        $submitted = $request->getPost();
+
+        $sql = 'INSERT INTO youtube (video_id, title, description)
+        VALUES (?, ?, ?)
+        ON DUPLICATE KEY UPDATE 
+            video_id=VALUES(video_id),
+            title=VALUES(title), 
+            description=VALUES(description)';
+
+        $db = \Config\Database::connect();
+        $query = $db->query($sql, array(
+            $submitted['video_id'],
+            $submitted['title'],
+            $submitted['description'],
+        ));
+
+        $session = \Config\Services::session();
+        $session->setFlashdata('submit-success', 'true');
+        return redirect()->to('recipe-editor?video_id=' . $submitted['video_id']);
+    }
+
     public function getIngredient()
     {
         $db = \Config\Database::connect();
         $builder = $db->table('ingredients');
         $builder->select('*');
         $result = $builder->get()->getResult();
+        sleep(1000);
         echo json_encode($result);
         exit();
     }
@@ -145,6 +170,7 @@ class RecipeLibraryController extends BaseController
         $builder = $db->table('recipe');
         $builder->select('recipe.*, youtube.video_id as yt_video_id');
         $builder->join('youtube', 'recipe.video_id = youtube.video_id', 'left');
+        $builder->orderBy('timestamp', 'DESC');
         $result = $builder->get()->getResult();
         $data['result'] = $result;
         return view('recipe_published', $data);
