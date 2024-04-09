@@ -10,7 +10,8 @@
         </div>
     <?php } ?>
     <main>
-        <br><br>
+        <?= $this->include('layout/navigation'); ?>
+
         <div class="container">
 
             <br>

@@ -2,7 +2,7 @@
 
 <body>
     <main>
-
+        <?= $this->include('layout/navigation'); ?>
         <br><br>
         <div class="container">
             <h3 class="d-inline">Artist: &nbsp;</h3>

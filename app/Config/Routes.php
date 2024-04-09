@@ -14,4 +14,5 @@ $routes->get('/scrape-youtube', 'Home::scrapeYT');
 $routes->get('/all-ingredients', 'RecipeLibraryController::getIngredient');
 $routes->get('/recipe-library', 'RecipeLibraryController::index');
 $routes->get('/recipe-editor', 'RecipeLibraryController::loadEditor');
+$routes->get('/recipe-published', 'RecipeLibraryController::getPublishedRecipe');
 $routes->post('/recipe-submit', 'RecipeLibraryController::submitRecipe');

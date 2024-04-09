@@ -138,4 +138,14 @@ class RecipeLibraryController extends BaseController
         echo json_encode($result);
         exit();
     }
+
+    public function getPublishedRecipe()
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('recipe');
+        $builder->select('*');
+        $result = $builder->get()->getResult();
+        $data['result'] = $result;
+        return view('recipe_published', $data);
+    }
 }
