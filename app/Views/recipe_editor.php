@@ -61,7 +61,7 @@
                         <br>
                         <div class="form-group row">
 
-                            <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
+                            <label for="inputTitle" class="col-sm-2 col-form-label">Alias Title</label>
                             <div class="col-sm-10">
                                 <textarea class="form-control" name="name" id="inputTitle" rows="3"><?= $published->name ?>
                                 </textarea>
@@ -69,7 +69,7 @@
                         </div>
                         <br>
                         <div class="form-group row">
-                            <label for="inputDescription" class="col-sm-2 col-form-label">Description</label>
+                            <label for="inputDescription" class="col-sm-2 col-form-label">Summarized Description</label>
                             <div class="col-sm-10">
                                 <textarea class="form-control" name="instructions" id="inputDescription" rows="30"><?= $published->instructions ?>
                                 </textarea>
