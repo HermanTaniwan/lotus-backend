@@ -24,7 +24,7 @@
                 });
 
                 $('#tokenfield').on('tokenfield:createdtoken', function(e) {
-                    console.log(e.attrs.value);
+                    // console.log(e.attrs.value);
                     var valid = datasource.includes((e.attrs.value))
                     if (!valid) {
                         $(e.relatedTarget).addClass('invalid')
@@ -48,19 +48,25 @@
                 input = $('.raw-ingredient').val().toLowerCase().trim();
                 arr_str = input.split(/\n/);
                 str = ""
-                units = ['gram', 'sdm', 'kg', 'sdt', 'liter', 'ruas', 'jari', 'potong', 'butir', 'ml', 'gr', 'cm', 'pcs', 'pack', 'pak', 'lembar', 'buah', 'batang', 'lempeng', 'ekor', 'jempol', 'telunjuk']
-                garbage = ['-', 'utuh', 'siung', 'air', , 'untuk', 'baluran', 'menggoreng', 'larutan', 'dan', 'bisa', 'di', 'tambahkan', 'ke', 'adonan', 'taburan', 'setengah',
+                units = ['gram', 'siung', 'sdm', 'kg', 'sdt', 'liter', 'ruas', 'jari', 'potong', 'butir', 'ml', 'gr', 'cm', 'pcs', 'pack', 'pak', 'lembar', 'buah', 'batang', 'lempeng', 'ekor', 'jempol', 'telunjuk']
+                garbage = ['-', 'utuh', 'air', 'untuk', 'baluran', 'menggoreng', 'larutan', 'dan', 'bisa', 'di', 'tambahkan', 'ke', 'adonan', 'taburan', 'setengah',
                     'resep', 'cubit', 'genggam', 'cincang', 'cuci', 'bersih', 'boleh', 'secukupnya', 'menumis', 'geprek', 'sangrai', 'bagi', 'ukuran'
                 ]
                 stopwords = units.concat(garbage);
+                // stopwords = ['secukupnya']
+
+                words = stopwords.join('|');
+                regex = new RegExp('\\b(' + words + ')\\b', 'g');
+                console.log(regex);
                 arr_str.forEach(function(item, index, arr) {
                     item = item.replace(/  +/g, '').replace(/\s\s+/g, '').replace(/•|-|—/g, '').replace(/[0-9]/g, "").replace(/\//g, ' ').replace(/&/g, "").replace(/,/g, "").replace(/\+/g, "").replace(/ *\([^)]*\) */g, "").replace(":", "").trim();
-                    item = item.replace(new RegExp('\\b(' + stopwords.join('|') + ')\\b', 'g'), '').trim();
+                    item = item.replace(regex, '').trim();
                     item = item.replace('sereh', 'serai').replace('gula-pasir', 'gula').replace('cabai', 'cabe').replace('saos', 'saus').replace('merica', 'lada').replace('minyak-zaitun', 'olive-oil').replace('chili-powder', 'bubuk-cabe')
                     item = item.split(' ').join('-').trim()
                     item = item.replace('---', ' ')
                     str += item + " "
                 })
+
                 str = str.trim();
                 $('.ingredients').val(str)
 
