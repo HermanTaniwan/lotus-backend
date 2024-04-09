@@ -37,7 +37,29 @@
 
         mark {
             color: #c3c3c3 !important;
-            background-color: white !important;
+            background-color: transparent !important;
+        }
+
+        .container,
+        table,
+        td,
+        th,
+        tr {
+            background-color: transparent !important;
+        }
+
+        .containerbackground {
+            font-size: 300px;
+            position: fixed;
+            top: 15%;
+            left: 10%;
+            bottom: 0;
+            z-index: -1;
+            transform: rotate(340deg);
+            -webkit-transform: rotate(340deg);
+            color: #efefef;
+            line-height: 1;
+            text-align: center;
         }
     </style>
 </head>

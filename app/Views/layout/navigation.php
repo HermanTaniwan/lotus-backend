@@ -1,3 +1,9 @@
+<?php if (ENVIRONMENT == "development") { ?>
+    <div class="containerbackground">
+        DEBUG MODE
+    </div>
+<?php } ?>
+
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#"> <strong> Lotus Backend</strong></a>

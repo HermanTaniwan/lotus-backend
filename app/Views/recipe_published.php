@@ -4,8 +4,6 @@
     <?= $this->include('layout/navigation'); ?>
     <main>
 
-        <br>
-
         <div class="col-12 container">
             <div><strong>Video Count: </strong><?= count($result); ?></div>
             <table class="table">
