@@ -159,7 +159,6 @@ class RecipeLibraryController extends BaseController
         $builder = $db->table('ingredients');
         $builder->select('*');
         $result = $builder->get()->getResult();
-        sleep(1000);
         echo json_encode($result);
         exit();
     }
