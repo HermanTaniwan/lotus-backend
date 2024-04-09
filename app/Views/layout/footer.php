@@ -8,7 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script src="<?= base_url(); ?>asset/plugins/sliptree-bootstrap-tokenfield-v0.12.1/sliptree-bootstrap-tokenfield-ff5b929/dist/bootstrap-tokenfield.min.js"></script>
     <!-- <script src="<?= base_url(); ?>" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script> -->
-
+    <script src="https://cdn.jsdelivr.net/npm/highlight-within-textarea@2.0.5/jquery.highlight-within-textarea.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $(function() {
             $(".alert").delay(2000).slideUp(300)
@@ -38,6 +39,10 @@
                     },
                     showAutocompleteOnFocus: true,
                     delimiter: [' ']
+                });
+                $('.list-ingredient').mark(datasource, {
+                    separateWordSearch: true,
+                    accuracy: "exactly"
                 });
 
             });

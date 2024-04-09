@@ -23,7 +23,7 @@
                     echo "<tr>";
                     echo "<td> {$r->id}</td>";
                     echo "<td> <a href='http://youtube.com/watch?v={$r->video_id}' target='_blank'>{$r->name}</a></td>";
-                    echo "<td> {$r->ingredients}</td>";
+                    echo "<td> <div class='list-ingredient'>{$r->ingredients}</div></td>";
                     echo "<td> {$r->region}</td>";
                     echo "<td> {$r->preparation}</td>";
                     echo "<td> {$r->artist_id}</td>";
