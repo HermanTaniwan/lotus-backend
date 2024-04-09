@@ -94,7 +94,8 @@
                                     'Chinese'    => 'Chinese',
                                     'Barat'  => 'Barat',
                                     'Japan' => 'Japan',
-                                    'Korea' => 'Korea'
+                                    'Korea' => 'Korea',
+                                    'Indian' => 'Indian'
                                 ];
 
                                 echo form_dropdown('region', $options, $published->region, ['class' => 'form-control']); ?>

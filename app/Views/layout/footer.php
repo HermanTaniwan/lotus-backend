@@ -50,7 +50,7 @@
                 str = ""
                 units = ['gram', 'siung', 'sdm', 'kg', 'sdt', 'liter', 'ruas', 'jari', 'potong', 'butir', 'ml', 'gr', 'cm', 'pcs', 'pack', 'pak', 'lembar', 'buah', 'batang', 'lempeng', 'ekor', 'jempol', 'telunjuk']
                 garbage = ['-', 'utuh', 'air', 'untuk', 'baluran', 'menggoreng', 'larutan', 'dan', 'bisa', 'di', 'tambahkan', 'ke', 'adonan', 'taburan', 'setengah',
-                    'resep', 'cubit', 'genggam', 'cincang', 'cuci', 'bersih', 'boleh', 'secukupnya', 'menumis', 'geprek', 'sangrai', 'bagi', 'ukuran'
+                    'resep', 'cubit', 'genggam', 'cincang', 'cuci', 'bersih', 'boleh', 'secukupnya', 'menumis', 'geprek', 'sangrai', 'bagi', 'ukuran', 'sendok', 'makan'
                 ]
                 stopwords = units.concat(garbage);
                 // stopwords = ['secukupnya']
