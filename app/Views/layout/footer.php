@@ -10,6 +10,7 @@
     <!-- <script src="<?= base_url(); ?>" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/highlight-within-textarea@2.0.5/jquery.highlight-within-textarea.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(function() {
             $(".alert").delay(2000).slideUp(300)
@@ -17,6 +18,22 @@
                 // alert($(this).val());
                 window.location.replace("<?= base_url(); ?>recipe-library?&artist_id=" + $(this).val());
             }))
+
+            function formatState(state) {
+                console.log(state.text);
+                var str_arr = state.text.split('|');
+                var $state = $(
+                    '<div>' + str_arr[0] + '</div>' + '<div style="font-size:10px; color:#999">' + str_arr[1] + '</div>'
+                );
+                return $state;
+
+            }
+
+            $('.artist-selector').select2({
+                height: 100,
+                templateResult: formatState,
+                templateSelection: formatState
+            });
 
             var datasource = [];
             $.getJSON("<?= base_url(); ?>all-ingredients", function(data) {

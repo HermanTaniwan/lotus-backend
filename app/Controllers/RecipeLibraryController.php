@@ -21,10 +21,13 @@ class RecipeLibraryController extends BaseController
         $results = $builder->get()->getFirstRow();
         $data['artist'] = $results;
 
-        /**DAPATIN SEMUA NAMA ARTIS */
+        /**DAPATIN SEMUA NAMA ARTIS & JUMLAH VIDEO YANG PUBLISH*/
+        // SELECT artist.*, count(recipe.artist_id) as count_published_video FROM artist LEFT JOIN recipe ON artist.id = recipe.artist_id GROUP BY artist.id;
         $db = \Config\Database::connect();
         $builder = $db->table('artist');
-        $builder->select('*');
+        $builder->select('artist.*,count(recipe.artist_id) as count_published_video');
+        $builder->join('recipe', 'artist.id = recipe.artist_id', 'left');
+        $builder->groupBy('artist.id');
         $results = $builder->get()->getResult();
         $data['all_artist'] = $results;
 

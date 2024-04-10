@@ -11,7 +11,7 @@
                 helper('form');
                 $options = [];
                 foreach ($all_artist as $eachArtist) {
-                    $options[$eachArtist->id] = $eachArtist->name;
+                    $options[$eachArtist->id] = $eachArtist->name . '|Published: ' . $eachArtist->count_published_video;
                 }
 
                 echo form_dropdown('artist', $options, $artist->id, ['class' => 'form-control d-inline w-auto artist-selector']);
