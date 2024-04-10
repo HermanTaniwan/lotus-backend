@@ -42,6 +42,7 @@ class Home extends BaseController
         $request = \Config\Services::request();
         $ingredients = $request->getGet('ingredients');
         $keywords = $request->getGet('keywords');
+        $region = $request->getGet('region') ?? '%%';
 
         $page = $request->getGet('page');
         $limit = $request->getGet('limit');
@@ -60,6 +61,8 @@ class Home extends BaseController
 
             $matchQuery = 'MATCH (recipe.name) AGAINST ("' . $keywords . '" IN BOOLEAN MODE)';
         }
+
+        $builder->like('region', $region);
 
         if ($matchQuery != "") {
             $builder->where($matchQuery);

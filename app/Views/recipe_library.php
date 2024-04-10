@@ -30,6 +30,7 @@
                     <th class="col-2">published_time</th>
                     <th>content_duration</th>
                     <th>published</th>
+                    <th></th>
                 </thead>
                 <?php foreach ($result as $r) {
                     echo "<tr>";
