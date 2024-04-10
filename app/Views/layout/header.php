@@ -22,6 +22,8 @@
             line-height: 1.428;
         }
 
+
+
         .select2-selection {
             height: auto !important;
             padding: 5px;
@@ -57,6 +59,10 @@
         th,
         tr {
             background-color: transparent !important;
+        }
+
+        tr:hover {
+            background-color: #a0a0a03d !important;
         }
 
         .containerbackground {

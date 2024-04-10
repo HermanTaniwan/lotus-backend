@@ -34,11 +34,11 @@
                 <?php foreach ($result as $r) {
                     echo "<tr>";
                     echo "<td> {$r->id}</td>";
-                    echo "<td> <a href='http://youtube.com/watch?v={$r->video_id}' target='_blank'>{$r->title}</a></td>";
+                    echo "<td> <a href=' " . base_url() . "recipe-editor?video_id=" . $r->video_id . "' target='_blank'>{$r->title}</a></td>";
                     echo "<td> {$r->published_time}</td>";
                     echo "<td> {$r->content_duration}</td>";
                     echo "<td> <h5><span class='badge " . ($r->published == 'yes' ? 'bg-success' : 'badge-not-success') . "'>{$r->published}</span></h5></td>";
-                    echo "<td> <a target='_blank' href='" . base_url() . "recipe-editor?video_id=$r->video_id'>edit</a>";
+                    echo "<td> <a target='_blank' href='https://youtube.com/watch?v=$r->video_id'>See Videos</a>";
                     echo "</tr>";
                 } ?>
 

@@ -20,13 +20,13 @@
                 <?php foreach ($result as $r) {
                     echo "<tr>";
                     echo "<td> {$r->id}</td>";
-                    echo "<td> <a href='http://youtube.com/watch?v={$r->video_id}' target='_blank'>{$r->name}</a></td>";
+                    echo "<td> <a href=' " . base_url() . "recipe-editor?video_id=" . $r->video_id . "' target='_blank'>{$r->name}</a></td>";
                     echo "<td> <div class='list-ingredient'>{$r->ingredients}</div></td>";
                     echo "<td> {$r->region}</td>";
                     echo "<td> {$r->preparation}</td>";
                     echo "<td> {$r->artist_id}</td>";
                     echo "<td> <h5><span class='badge " . ($r->yt_video_id != null ? 'bg-success' : 'bg-danger') . "'> &nbsp;&nbsp;&nbsp;&nbsp;</span></h5></td>";
-                    echo "<td> <a target='_blank' href='" . base_url() . "recipe-editor?video_id=$r->video_id'>edit</a>";
+                    echo "<td> <a href='http://www.youtube.com/watch?v='" . $r->video_id . "_target='_blank' >See Videos</a>";
                     echo "</tr>";
                 } ?>
 
