@@ -42,7 +42,9 @@ class Home extends BaseController
         $request = \Config\Services::request();
         $ingredients = $request->getGet('ingredients');
         $keywords = $request->getGet('keywords');
-        $region = $request->getGet('region') ?? '%%';
+        $region = $request->getGet('region');
+        $duration = $request->getGet('duration');
+
 
         $page = $request->getGet('page');
         $limit = $request->getGet('limit');
@@ -62,7 +64,21 @@ class Home extends BaseController
             $matchQuery = 'MATCH (recipe.name) AGAINST ("' . $keywords . '" IN BOOLEAN MODE)';
         }
 
-        $builder->like('region', $region);
+        if ($region != '') {
+            $builder->like('region', $region);
+        }
+        switch ($duration) {
+            case 'cepat':
+                $builder->where('youtube.content_duration <', '00:05:00');
+                break;
+            case 'sedang':
+                $builder->where('youtube.content_duration >', '00:05:00');
+                $builder->where('youtube.content_duration <', '00:08:00');
+                break;
+            case 'detail':
+                $builder->where('youtube.content_duration >', '00:08:00');
+                break;
+        }
 
         if ($matchQuery != "") {
             $builder->where($matchQuery);
@@ -70,6 +86,9 @@ class Home extends BaseController
         } else {
             $builder->orderBy('recipe.id', 'DESC');
         }
+
+        // var_dump($builder->getCompiledSelect());
+        // die();
 
         $results = $builder->get($limit, $offset)->getResult();
 
