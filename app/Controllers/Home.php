@@ -45,6 +45,7 @@ class Home extends BaseController
         $region = $request->getGet('region');
         $duration = $request->getGet('duration');
         $types = $request->getGet('types');
+        $key_food = $request->getGet('key_food');
 
         $page = $request->getGet('page');
         $limit = $request->getGet('limit');
@@ -70,6 +71,10 @@ class Home extends BaseController
 
         if ($region != '') {
             $builder->like('region', $region);
+        }
+
+        if ($key_food != '') {
+            $builder->like('region', $key_food);
         }
         switch ($duration) {
             case 'cepat':
