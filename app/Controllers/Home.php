@@ -44,7 +44,7 @@ class Home extends BaseController
         $keywords = $request->getGet('keywords');
         $region = $request->getGet('region');
         $duration = $request->getGet('duration');
-
+        $types = $request->getGet('types');
 
         $page = $request->getGet('page');
         $limit = $request->getGet('limit');
@@ -62,6 +62,10 @@ class Home extends BaseController
         } else if ($keywords != "") {
 
             $matchQuery = 'MATCH (recipe.name) AGAINST ("' . $keywords . '" IN BOOLEAN MODE)';
+        }
+
+        if ($types != '') {
+            $builder->like('types', $types);
         }
 
         if ($region != '') {
