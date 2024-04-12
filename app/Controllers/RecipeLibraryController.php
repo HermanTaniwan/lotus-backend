@@ -87,6 +87,7 @@ class RecipeLibraryController extends BaseController
             $data['published']->name = $data['original']->title;
             $data['published']->instructions = $data['original']->description;
             $data['published']->region = '';
+            $data['published']->type = '';
             $data['published']->preparation = '';
             $data['published']->ingredients = '';
             $data['published']->video_id = $video_id;
@@ -106,13 +107,14 @@ class RecipeLibraryController extends BaseController
         $request = \Config\Services::request();
         $submitted = $request->getPost();
 
-        $sql = 'INSERT INTO recipe (video_id, name, instructions,region,ingredients,artist_id)
-        VALUES (?, ?, ?, ?, ? ,?)
+        $sql = 'INSERT INTO recipe (video_id, name, instructions,region,types,ingredients,artist_id)
+        VALUES (?, ?, ?, ?, ?, ? ,?)
         ON DUPLICATE KEY UPDATE 
             video_id=VALUES(video_id),
             name=VALUES(name), 
             instructions=VALUES(instructions), 
             region=VALUES(region),
+            region=VALUES(types),
             ingredients=VALUES(ingredients),
             artist_id=VALUE(artist_id)';
 
@@ -122,6 +124,7 @@ class RecipeLibraryController extends BaseController
             $submitted['name'],
             $submitted['instructions'],
             $submitted['region'],
+            $submitted['types'],
             $submitted['ingredients'],
             $submitted['artist_id'],
 
@@ -141,10 +144,7 @@ class RecipeLibraryController extends BaseController
 
             $db = \Config\Database::connect();
             $builder = $db->table('recipe');
-            foreach ($submitted['data'] as $key => $value) {
-                $builder->set($key, $value);
-            }
-
+            $builder->set($submitted['data']['category'], $submitted['data']['value']);
             $builder->where('id', $submitted['id']);
             $builder->update();
             $response_array['status'] = 'success';

@@ -13,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(function() {
-            $('.region-published-dd').change(function() {
+            $('.input-dd').change(function() {
                 var el = $(this).closest('tr');
                 $.ajax({
                     url: "<?= base_url(); ?>update-recipe",
@@ -21,7 +21,8 @@
                     data: {
                         "id": $(this).attr('recipe_id'),
                         "data": {
-                            "region": $(this).val()
+                            "category": $(this).attr('category'),
+                            "value": $(this).val()
                         }
                     },
                 }).done(function(data) {

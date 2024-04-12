@@ -12,6 +12,7 @@
                     <th class="col-2">name</th>
                     <th class="col-3">ingredients</th>
                     <th class="col-1">region</th>
+                    <th class="col-1">types</th>
                     <th class="col-1">preparation</th>
                     <th class="col-1">artist_id</th>
                     <th class="col-1">scraped</th>
@@ -25,6 +26,7 @@
                     echo "<td>";
                     helper('form');
                     $options = [
+                        '' => 'Please Select',
                         'Indonesia'  => 'Indonesia',
                         'Chinese'    => 'Chinese',
                         'Barat'  => 'Barat',
@@ -34,7 +36,19 @@
                         'Thai' => 'Thai'
                     ];
 
-                    echo form_dropdown('region', $options, $r->region, ['class' => 'form-control region-published-dd', 'recipe_id' => $r->id]);
+                    echo form_dropdown('region', $options, $r->region, ['class' => 'form-control input-dd', 'recipe_id' => $r->id, 'category' => 'region']);
+                    echo "</td>";
+                    echo "<td>";
+                    helper('form');
+                    $options = [
+                        '' => 'Please Select',
+                        'Kuah'  => 'Kuah',
+                        'Goreng'    => 'Goreng',
+                        'Rebus' => 'Rebus',
+                        'Tumis'  => 'Tumis',
+                        'Gulai' => 'Gulai',
+                    ];
+                    echo form_dropdown('region', $options, $r->types, ['class' => 'form-control input-dd', 'recipe_id' => $r->id, 'category' => 'types']);
                     echo "</td>";
                     echo "<td> {$r->preparation}</td>";
                     echo "<td> {$r->artist_id}</td>";

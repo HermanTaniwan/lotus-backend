@@ -104,6 +104,25 @@
                         </div>
                         <br>
                         <div class="form-group row">
+                            <label for="inputTypes" class="col-sm-2 col-form-label">Types</label>
+                            <div class="col-sm-10">
+
+                                <?php
+                                helper('form');
+                                $options = [
+                                    '' => 'Please Select',
+                                    'Kuah'  => 'Kuah',
+                                    'Goreng'    => 'Goreng',
+                                    'Rebus' => 'Rebus',
+                                    'Tumis'  => 'Tumis',
+                                    'Gulai' => 'Gulai',
+                                ];
+
+                                echo form_dropdown('types', $options, $published->types, ['class' => 'form-control']); ?>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row">
                             <label for="inputIngredient" class="col-sm-2 col-form-label">Raw Ingredient</label>
                             <div class="col-sm-10">
                                 <textarea class="raw-ingredient form-control" name="" id="" cols="30" rows="10"></textarea>
