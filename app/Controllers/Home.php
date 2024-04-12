@@ -74,7 +74,7 @@ class Home extends BaseController
         }
 
         if ($key_food != '') {
-            $builder->like('region', $key_food);
+            $builder->like('key_food', $key_food);
         }
         switch ($duration) {
             case 'cepat':
