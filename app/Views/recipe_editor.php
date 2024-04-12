@@ -116,6 +116,7 @@
                                     'Rebus' => 'Rebus',
                                     'Tumis'  => 'Tumis',
                                     'Gulai' => 'Gulai',
+                                    'Bakar' => 'Bakar',
                                 ];
 
                                 echo form_dropdown('types', $options, $published->types, ['class' => 'form-control']); ?>

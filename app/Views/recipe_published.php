@@ -47,6 +47,7 @@
                         'Rebus' => 'Rebus',
                         'Tumis'  => 'Tumis',
                         'Gulai' => 'Gulai',
+                        'Bakar' => 'Bakar',
                     ];
                     echo form_dropdown('region', $options, $r->types, ['class' => 'form-control input-dd', 'recipe_id' => $r->id, 'category' => 'types']);
                     echo "</td>";
