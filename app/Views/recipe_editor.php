@@ -111,15 +111,28 @@
                                 helper('form');
                                 $options = [
                                     '' => 'Please Select',
-                                    'Kuah'  => 'Kuah',
-                                    'Goreng'    => 'Goreng',
+                                    'Goreng' => 'Goreng',
                                     'Rebus' => 'Rebus',
-                                    'Tumis'  => 'Tumis',
-                                    'Gulai' => 'Gulai',
                                     'Bakar' => 'Bakar',
                                 ];
-
                                 echo form_dropdown('types', $options, $published->types, ['class' => 'form-control']); ?>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row">
+                            <label for="inputTypes" class="col-sm-2 col-form-label">Utama</label>
+                            <div class="col-sm-10">
+                                <?php
+                                helper('form');
+                                $options = [
+                                    '' => 'Please Select',
+                                    'Ayam' => 'Ayam',
+                                    'Sapi' => 'Sapi',
+                                    'Ikan' => 'Ikan',
+                                    'Sayur' => 'Sayur',
+                                ];
+
+                                echo form_dropdown('key_food', $options, $published->key_food, ['class' => 'form-control']); ?>
                             </div>
                         </div>
                         <br>

@@ -88,6 +88,7 @@ class RecipeLibraryController extends BaseController
             $data['published']->instructions = $data['original']->description;
             $data['published']->region = '';
             $data['published']->type = '';
+            $data['published']->key_food = '';
             $data['published']->preparation = '';
             $data['published']->ingredients = '';
             $data['published']->video_id = $video_id;
@@ -107,14 +108,15 @@ class RecipeLibraryController extends BaseController
         $request = \Config\Services::request();
         $submitted = $request->getPost();
 
-        $sql = 'INSERT INTO recipe (video_id, name, instructions,region,types,ingredients,artist_id)
-        VALUES (?, ?, ?, ?, ?, ? ,?)
+        $sql = 'INSERT INTO recipe (video_id, name, instructions,region,types,key_food,ingredients,artist_id)
+        VALUES (?, ?, ?, ?, ?, ?, ? ,?)
         ON DUPLICATE KEY UPDATE 
             video_id=VALUES(video_id),
             name=VALUES(name), 
             instructions=VALUES(instructions), 
             region=VALUES(region),
-            region=VALUES(types),
+            types=VALUES(types),
+            key_food=VALUES(key_food),
             ingredients=VALUES(ingredients),
             artist_id=VALUE(artist_id)';
 
@@ -125,6 +127,7 @@ class RecipeLibraryController extends BaseController
             $submitted['instructions'],
             $submitted['region'],
             $submitted['types'],
+            $submitted['key_food'],
             $submitted['ingredients'],
             $submitted['artist_id'],
 
