@@ -13,6 +13,34 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(function() {
+            $('.region-published-dd').change(function() {
+                var el = $(this).closest('tr');
+                $.ajax({
+                    url: "<?= base_url(); ?>update-recipe",
+                    type: "POST",
+                    data: {
+                        "id": $(this).attr('recipe_id'),
+                        "data": {
+                            "region": $(this).val()
+                        }
+                    },
+                }).done(function(data) {
+                    var response = $.parseJSON(data);
+                    if (response.status == "success") {
+                        // $('#myElement').animate({backgroundColor: '#FF0000'}, 'slow');
+                        el.attr('style', 'background-color: #8cff8c !important').animate({
+                            "backgroundColor": "rgba(255, 255, 255, 0.0) !important"
+                        }, 1000);;
+                    } else if (response.status == "error") {
+                        alert(response.message);
+                    } else {
+                        alert("NO FEEDBACK FOUND");
+                    }
+                    // $(this).addClass("done");
+                });
+            })
+
+
             $(".alert").delay(2000).slideUp(300)
             $('.artist-selector').change((function() {
                 // alert($(this).val());
@@ -36,33 +64,33 @@
             });
 
             var datasource = [];
-            $.getJSON("<?= base_url(); ?>all-ingredients", function(data) {
-                $.each(data, function(key, val) {
-                    datasource.push(val.ingredient_id);
-                });
+            // $.getJSON("<?= base_url(); ?>all-ingredients", function(data) {
+            //     $.each(data, function(key, val) {
+            //         datasource.push(val.ingredient_id);
+            //     });
 
-                $('#tokenfield').on('tokenfield:createdtoken', function(e) {
-                    // console.log(e.attrs.value);
-                    var valid = datasource.includes((e.attrs.value))
-                    if (!valid) {
-                        $(e.relatedTarget).addClass('invalid')
-                    }
-                })
+            //     $('#tokenfield').on('tokenfield:createdtoken', function(e) {
+            //         // console.log(e.attrs.value);
+            //         var valid = datasource.includes((e.attrs.value))
+            //         if (!valid) {
+            //             $(e.relatedTarget).addClass('invalid')
+            //         }
+            //     })
 
-                $('#tokenfield').tokenfield({
-                    autocomplete: {
-                        source: datasource,
-                        delay: 100
-                    },
-                    showAutocompleteOnFocus: true,
-                    delimiter: [' ']
-                });
-                $('.list-ingredient').mark(datasource, {
-                    separateWordSearch: true,
-                    accuracy: "exactly"
-                });
+            //     $('#tokenfield').tokenfield({
+            //         autocomplete: {
+            //             source: datasource,
+            //             delay: 100
+            //         },
+            //         showAutocompleteOnFocus: true,
+            //         delimiter: [' ']
+            //     });
+            //     $('.list-ingredient').mark(datasource, {
+            //         separateWordSearch: true,
+            //         accuracy: "exactly"
+            //     });
 
-            });
+            // });
 
             $('.get-ingredient-btn').click(function() {
                 console.log('execute');
@@ -100,6 +128,11 @@
                     showAutocompleteOnFocus: true,
                     delimiter: [' ']
                 });
+
+
+
+
+
             });
 
 

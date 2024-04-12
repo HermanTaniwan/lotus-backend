@@ -19,10 +19,23 @@
                 </thead>
                 <?php foreach ($result as $r) {
                     echo "<tr>";
-                    echo "<td> {$r->id}</td>";
+                    echo "<td class='the-id'> {$r->id}</td>";
                     echo "<td> <a href=' " . base_url() . "recipe-editor?video_id=" . $r->video_id . "' target='_blank'>{$r->name}</a></td>";
                     echo "<td> <div class='list-ingredient'>{$r->ingredients}</div></td>";
-                    echo "<td> {$r->region}</td>";
+                    echo "<td>";
+                    helper('form');
+                    $options = [
+                        'Indonesia'  => 'Indonesia',
+                        'Chinese'    => 'Chinese',
+                        'Barat'  => 'Barat',
+                        'Jepang' => 'Jepang',
+                        'Korea' => 'Korea',
+                        'Indian' => 'India',
+                        'Thai' => 'Thai'
+                    ];
+
+                    echo form_dropdown('region', $options, $r->region, ['class' => 'form-control region-published-dd', 'recipe_id' => $r->id]);
+                    echo "</td>";
                     echo "<td> {$r->preparation}</td>";
                     echo "<td> {$r->artist_id}</td>";
                     echo "<td> <h5><span class='badge " . ($r->yt_video_id != null ? 'bg-success' : 'bg-danger') . "'> &nbsp;&nbsp;&nbsp;&nbsp;</span></h5></td>";

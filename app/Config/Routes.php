@@ -17,3 +17,4 @@ $routes->get('/recipe-editor', 'RecipeLibraryController::loadEditor');
 $routes->get('/recipe-published', 'RecipeLibraryController::getPublishedRecipe');
 $routes->post('/recipe-submit', 'RecipeLibraryController::submitRecipe');
 $routes->post('/recipe-youtube-submit', 'RecipeLibraryController::submitRecipeYT');
+$routes->post('/update-recipe', 'RecipeLibraryController::updateRecipe');

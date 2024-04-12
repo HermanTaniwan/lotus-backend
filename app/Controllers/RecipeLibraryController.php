@@ -132,6 +132,31 @@ class RecipeLibraryController extends BaseController
         return redirect()->to('recipe-editor?video_id=' . $submitted['video_id']);
     }
 
+    public function updateRecipe()
+    {
+        try {
+            $request = \Config\Services::request();
+            $submitted = $request->getPost();
+
+
+            $db = \Config\Database::connect();
+            $builder = $db->table('recipe');
+            foreach ($submitted['data'] as $key => $value) {
+                $builder->set($key, $value);
+            }
+
+            $builder->where('id', $submitted['id']);
+            $builder->update();
+            $response_array['status'] = 'success';
+        } catch (\Exception $e) {
+            header('Content-type: application/json');
+            $response_array['status'] = 'error';
+            $response_array['message'] = $e->getMessage();
+        }
+        header('Content-type: application/json');
+        echo json_encode($response_array);
+    }
+
     public function submitRecipeYT()
     {
         $request = \Config\Services::request();
