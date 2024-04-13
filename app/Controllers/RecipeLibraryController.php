@@ -7,7 +7,7 @@ use Datetime;
 
 class RecipeLibraryController extends BaseController
 {
-    public function index(): string
+    public function loadLibrary(): string
     {
         $request = \Config\Services::request();
         $artist_id = $request->getGet('artist_id');
@@ -90,6 +90,7 @@ class RecipeLibraryController extends BaseController
             $data['published']->type = '';
             $data['published']->key_food = '';
             $data['published']->preparation = '';
+            $data['published']->tags = '';
             $data['published']->ingredients = '';
             $data['published']->video_id = $video_id;
             $data['published']->artist_id = $data['original']->artist_id;
@@ -108,15 +109,13 @@ class RecipeLibraryController extends BaseController
         $request = \Config\Services::request();
         $submitted = $request->getPost();
 
-        $sql = 'INSERT INTO recipe (video_id, name, instructions,region,types,key_food,ingredients,artist_id)
-        VALUES (?, ?, ?, ?, ?, ?, ? ,?)
+        $sql = 'INSERT INTO recipe (video_id, name, instructions,tags,ingredients,artist_id)
+        VALUES (?, ?, ?, ?, ? ,?)
         ON DUPLICATE KEY UPDATE 
             video_id=VALUES(video_id),
             name=VALUES(name), 
             instructions=VALUES(instructions), 
-            region=VALUES(region),
-            types=VALUES(types),
-            key_food=VALUES(key_food),
+            tags=VALUES(tags),
             ingredients=VALUES(ingredients),
             artist_id=VALUE(artist_id)';
 
@@ -125,9 +124,7 @@ class RecipeLibraryController extends BaseController
             $submitted['video_id'],
             $submitted['name'],
             $submitted['instructions'],
-            $submitted['region'],
-            $submitted['types'],
-            $submitted['key_food'],
+            $submitted['tags'],
             $submitted['ingredients'],
             $submitted['artist_id'],
 
@@ -138,7 +135,7 @@ class RecipeLibraryController extends BaseController
         return redirect()->to('recipe-editor?video_id=' . $submitted['video_id']);
     }
 
-    public function updateRecipe()
+    public function updateRecipeTags()
     {
         try {
             $request = \Config\Services::request();
@@ -147,7 +144,7 @@ class RecipeLibraryController extends BaseController
 
             $db = \Config\Database::connect();
             $builder = $db->table('recipe');
-            $builder->set($submitted['data']['category'], $submitted['data']['value']);
+            $builder->set("tags", $submitted['data']['value']);
             $builder->where('id', $submitted['id']);
             $builder->update();
             $response_array['status'] = 'success';
@@ -191,6 +188,15 @@ class RecipeLibraryController extends BaseController
         $builder->select('*');
         $result = $builder->get()->getResult();
         echo json_encode($result);
+        exit();
+    }
+
+    public function getRecipeTags()
+    {
+        $country = ['Indonesia', 'Chinese', 'Jepang', 'Korea', 'Barat', 'India', 'Thai'];
+        $types = ['Goreng', 'Rebus', 'Bakar'];
+        $olahan = ['Ayam', 'Sapi', 'Kambing', 'Seafood', 'Sayur'];
+        echo json_encode(array_merge($country, $types, $olahan));
         exit();
     }
 

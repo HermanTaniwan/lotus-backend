@@ -11,9 +11,7 @@
                     <th class="col-1">id</th>
                     <th class="col-2">name</th>
                     <th class="col-3">ingredients</th>
-                    <th class="col-1">region</th>
-                    <th class="col-1">types</th>
-                    <th class="col-1">utama</th>
+                    <th class="col-3">tags</th>
                     <th class="col-1">preparation</th>
                     <th class="col-1">artist_id</th>
                     <th class="col-1">scraped</th>
@@ -24,41 +22,44 @@
                     echo "<td class='the-id'> {$r->id}</td>";
                     echo "<td> <a href=' " . base_url() . "recipe-editor?video_id=" . $r->video_id . "' target='_blank'>{$r->name}</a></td>";
                     echo "<td> <div class='list-ingredient'>{$r->ingredients}</div></td>";
-                    echo "<td>";
-                    helper('form');
-                    $options = [
-                        '' => 'Please Select',
-                        'Indonesia'  => 'Indonesia',
-                        'Chinese'    => 'Chinese',
-                        'Barat'  => 'Barat',
-                        'Jepang' => 'Jepang',
-                        'Korea' => 'Korea',
-                        'Indian' => 'India',
-                        'Thai' => 'Thai'
-                    ];
+                    // echo "<td>";
+                    // helper('form');
+                    // $options = [
+                    //     '' => 'Please Select',
+                    //     'Indonesia'  => 'Indonesia',
+                    //     'Chinese'    => 'Chinese',
+                    //     'Barat'  => 'Barat',
+                    //     'Jepang' => 'Jepang',
+                    //     'Korea' => 'Korea',
+                    //     'Indian' => 'India',
+                    //     'Thai' => 'Thai'
+                    // ];
 
-                    echo form_dropdown('region', $options, $r->region, ['class' => 'form-control input-dd', 'recipe_id' => $r->id, 'category' => 'region']);
-                    echo "</td>";
+                    // echo form_dropdown('region', $options, $r->region, ['class' => 'form-control input-dd', 'recipe_id' => $r->id, 'category' => 'region']);
+                    // echo "</td>";
+                    // echo "<td>";
+                    // helper('form');
+                    // $options = [
+                    //     '' => 'Please Select',
+                    //     'Goreng' => 'Goreng',
+                    //     'Rebus' => 'Rebus',
+                    //     'Bakar' => 'Bakar',
+                    // ];
+                    // echo form_dropdown('category', $options, $r->types, ['class' => 'form-control input-dd', 'recipe_id' => $r->id, 'category' => 'types']);
+                    // echo "</td>";
+                    // echo "<td>";
+                    // helper('form');
+                    // $options = [
+                    //     '' => 'Please Select',
+                    //     'Ayam' => 'Ayam',
+                    //     'Sapi' => 'Sapi',
+                    //     'Ikan' => 'Seafood',
+                    //     'Sayur' => 'Sayur',
+                    // ];
+                    // echo form_dropdown('key_food', $options, $r->key_food, ['class' => 'form-control input-dd', 'recipe_id' => $r->id, 'category' => 'key_food']);
+                    // echo "</td>";
                     echo "<td>";
-                    helper('form');
-                    $options = [
-                        '' => 'Please Select',
-                        'Goreng' => 'Goreng',
-                        'Rebus' => 'Rebus',
-                        'Bakar' => 'Bakar',
-                    ];
-                    echo form_dropdown('category', $options, $r->types, ['class' => 'form-control input-dd', 'recipe_id' => $r->id, 'category' => 'types']);
-                    echo "</td>";
-                    echo "<td>";
-                    helper('form');
-                    $options = [
-                        '' => 'Please Select',
-                        'Ayam' => 'Ayam',
-                        'Sapi' => 'Sapi',
-                        'Ikan' => 'Seafood',
-                        'Sayur' => 'Sayur',
-                    ];
-                    echo form_dropdown('key_food', $options, $r->key_food, ['class' => 'form-control input-dd', 'recipe_id' => $r->id, 'category' => 'key_food']);
+                    echo '<input type="text" class="form-control tags-tokenfield" name="ingredients" recipe_id="' . $r->id . '" value="' . $r->tags . '" />';
                     echo "</td>";
                     echo "<td> {$r->preparation}</td>";
                     echo "<td> {$r->artist_id}</td>";

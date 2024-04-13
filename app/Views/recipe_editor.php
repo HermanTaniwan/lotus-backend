@@ -84,55 +84,9 @@
                         </div>
                         <br>
                         <div class="form-group row">
-                            <label for="inputRegion" class="col-sm-2 col-form-label">Region</label>
+                            <label for="inputTags" class="col-sm-2 col-form-label">Tags</label>
                             <div class="col-sm-10">
-
-                                <?php
-                                helper('form');
-                                $options = [
-                                    'Indonesia'  => 'Indonesia',
-                                    'Chinese'    => 'Chinese',
-                                    'Barat'  => 'Barat',
-                                    'Jepang' => 'Jepang',
-                                    'Korea' => 'Korea',
-                                    'Indian' => 'India',
-                                    'Thai' => 'Thai'
-                                ];
-
-                                echo form_dropdown('region', $options, $published->region, ['class' => 'form-control']); ?>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="form-group row">
-                            <label for="inputTypes" class="col-sm-2 col-form-label">Types</label>
-                            <div class="col-sm-10">
-
-                                <?php
-                                helper('form');
-                                $options = [
-                                    '' => 'Please Select',
-                                    'Goreng' => 'Goreng',
-                                    'Rebus' => 'Rebus',
-                                    'Bakar' => 'Bakar',
-                                ];
-                                echo form_dropdown('types', $options, $published->types, ['class' => 'form-control']); ?>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="form-group row">
-                            <label for="inputTypes" class="col-sm-2 col-form-label">Utama</label>
-                            <div class="col-sm-10">
-                                <?php
-                                helper('form');
-                                $options = [
-                                    '' => 'Please Select',
-                                    'Ayam' => 'Ayam',
-                                    'Sapi' => 'Sapi',
-                                    'Ikan' => 'Seafood',
-                                    'Sayur' => 'Sayur',
-                                ];
-
-                                echo form_dropdown('key_food', $options, $published->key_food, ['class' => 'form-control']); ?>
+                                <input type="text" class="form-control tags-tokenfield" name="tags" recipe_id="<?= $published->id ?>" value="<?= $published->tags ?>" />
                             </div>
                         </div>
                         <br>
@@ -147,12 +101,9 @@
                         <div class="form-group row">
                             <label for="inputIngredient" class="col-sm-2 col-form-label">Ingredient</label>
                             <div class="col-sm-10">
-
                                 <input type="text" class="form-control ingredients" name="ingredients" id="tokenfield" value="<?= $published->ingredients ?>" />
-
                             </div>
                         </div>
-
                         <br>
                         <div class="form-group row">
                             <label for="inputDescription" class="col-sm-2 col-form-label"></label>

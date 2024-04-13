@@ -65,33 +65,84 @@
             });
 
             var datasource = [];
-            // $.getJSON("<?= base_url(); ?>all-ingredients", function(data) {
-            //     $.each(data, function(key, val) {
-            //         datasource.push(val.ingredient_id);
-            //     });
+            $.getJSON("<?= base_url(); ?>all-ingredients", function(data) {
+                $.each(data, function(key, val) {
+                    datasource.push(val.ingredient_id);
+                });
 
-            //     $('#tokenfield').on('tokenfield:createdtoken', function(e) {
-            //         // console.log(e.attrs.value);
-            //         var valid = datasource.includes((e.attrs.value))
-            //         if (!valid) {
-            //             $(e.relatedTarget).addClass('invalid')
-            //         }
-            //     })
+                $('#tokenfield').on('tokenfield:createdtoken', function(e) {
+                    // console.log(e.attrs.value);
+                    var valid = datasource.includes((e.attrs.value))
+                    if (!valid) {
+                        $(e.relatedTarget).addClass('invalid')
+                    }
+                })
 
-            //     $('#tokenfield').tokenfield({
-            //         autocomplete: {
-            //             source: datasource,
-            //             delay: 100
-            //         },
-            //         showAutocompleteOnFocus: true,
-            //         delimiter: [' ']
-            //     });
-            //     $('.list-ingredient').mark(datasource, {
-            //         separateWordSearch: true,
-            //         accuracy: "exactly"
-            //     });
+                $('#tokenfield').tokenfield({
+                    autocomplete: {
+                        source: datasource,
+                        delay: 100
+                    },
+                    showAutocompleteOnFocus: true,
+                    delimiter: [' ']
+                });
+                // $('.list-ingredient').mark(datasource, {
+                //     separateWordSearch: true,
+                //     accuracy: "exactly"
+                // });
 
-            // });
+            });
+
+            var TagsDS = [];
+            $.getJSON("<?= base_url(); ?>all-recipe-tags", function(data) {
+                $.each(data, function(key, val) {
+                    TagsDS.push(val);
+                });
+
+                $('.tags-tokenfield').on('tokenfield:createtoken', function(e) {
+                    // console.log(e.attrs.value);
+                    var valid = TagsDS.includes((e.attrs.value))
+                    if (!valid) {
+                        $(e.relatedTarget).addClass('invalid')
+                    }
+                })
+
+                $('.tags-tokenfield').tokenfield({
+                    autocomplete: {
+                        source: TagsDS,
+                        delay: 100
+                    },
+                    showAutocompleteOnFocus: true,
+                    delimiter: [' ']
+                });
+
+                $('.tags-tokenfield').on('change', function(e) {
+                    var el = $(this).closest('tr');
+                    el.attr('style', 'background-color: #8cff8c !important').animate({
+                        "backgroundColor": "rgba(255, 255, 255, 0.0) !important"
+                    }, 1000);
+
+                    $.ajax({
+                        url: "<?= base_url(); ?>update-recipe-tags",
+                        type: "POST",
+                        data: {
+                            "id": $(this).attr('recipe_id'),
+                            "data": {
+                                "category": $(this).attr('category'),
+                                "value": $(this).val()
+                            }
+                        },
+                    }).done(function(data) {});
+
+                    // alert('change');
+                });
+
+                // $('.list-ingredient').mark(TagsDS, {
+                //     separateWordSearch: true,
+                //     accuracy: "exactly"
+                // });
+
+            });
 
             $('.get-ingredient-btn').click(function() {
                 console.log('execute');

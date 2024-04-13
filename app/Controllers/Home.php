@@ -42,11 +42,8 @@ class Home extends BaseController
         $request = \Config\Services::request();
         $ingredients = $request->getGet('ingredients');
         $keywords = $request->getGet('keywords');
-        $region = $request->getGet('region');
         $duration = $request->getGet('duration');
-        $types = $request->getGet('types');
-        $key_food = $request->getGet('key_food');
-
+        $tags = $request->getGet('tags');
         $page = $request->getGet('page');
         $limit = $request->getGet('limit');
         $offset = intval($page) * intval($limit);
@@ -65,17 +62,15 @@ class Home extends BaseController
             $matchQuery = 'MATCH (recipe.name) AGAINST ("' . $keywords . '" IN BOOLEAN MODE)';
         }
 
-        if ($types != '') {
-            $builder->like('types', $types);
+        if ($tags != '') {
+            $splitedText = explode(' ', trim($tags));
+            foreach ($splitedText as $txt) {
+                if ($txt != '')
+                    $builder->like('tags', $txt);
+            }
         }
 
-        if ($region != '') {
-            $builder->like('region', $region);
-        }
 
-        if ($key_food != '') {
-            $builder->like('key_food', $key_food);
-        }
         switch ($duration) {
             case 'cepat':
                 $builder->where('youtube.content_duration <', '00:05:00');
