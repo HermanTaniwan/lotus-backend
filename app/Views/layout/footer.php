@@ -70,12 +70,18 @@
                     datasource.push(val.ingredient_id);
                 });
 
-                $('#tokenfield').on('tokenfield:createdtoken', function(e) {
+                $('#tokenfield').on('tokenfield:createtoken', function(e) {
                     // console.log(e.attrs.value);
                     var valid = datasource.includes((e.attrs.value))
                     if (!valid) {
                         $(e.relatedTarget).addClass('invalid')
                     }
+                    var existingTokens = $(this).tokenfield('getTokens');
+                    $.each(existingTokens, function(index, token) {
+                        console.log(token.value === e.attrs.value);
+                        if (token.value === e.attrs.value)
+                            e.preventDefault();
+                    });
                 })
 
                 $('#tokenfield').tokenfield({
@@ -99,13 +105,7 @@
                     TagsDS.push(val);
                 });
 
-                $('.tags-tokenfield').on('tokenfield:createtoken', function(e) {
-                    // console.log(e.attrs.value);
-                    var valid = TagsDS.includes((e.attrs.value))
-                    if (!valid) {
-                        $(e.relatedTarget).addClass('invalid')
-                    }
-                })
+
 
                 $('.tags-tokenfield').tokenfield({
                     autocomplete: {
@@ -116,11 +116,24 @@
                     delimiter: [' ']
                 });
 
+                $('.tags-tokenfield').on('tokenfield:createtoken', function(e) {
+                    // console.log(e.attrs.value);
+                    var valid = TagsDS.includes((e.attrs.value))
+                    if (!valid) {
+                        $(e.relatedTarget).addClass('invalid')
+                    }
+
+                    var existingTokens = $(this).tokenfield('getTokens');
+                    $.each(existingTokens, function(index, token) {
+                        console.log(token.value === e.attrs.value);
+                        if (token.value === e.attrs.value)
+                            e.preventDefault();
+                    });
+                })
+
                 $('.tags-tokenfield').on('change', function(e) {
+
                     var el = $(this).closest('tr');
-                    el.attr('style', 'background-color: #8cff8c !important').animate({
-                        "backgroundColor": "rgba(255, 255, 255, 0.0) !important"
-                    }, 1000);
 
                     $.ajax({
                         url: "<?= base_url(); ?>update-recipe-tags",
@@ -132,7 +145,12 @@
                                 "value": $(this).val()
                             }
                         },
-                    }).done(function(data) {});
+                    }).done(function(data) {
+
+                        el.attr('style', 'background-color: #8cff8c !important').animate({
+                            "backgroundColor": "rgba(255, 255, 255, 0.0) !important"
+                        }, 1000);
+                    });
 
                     // alert('change');
                 });
