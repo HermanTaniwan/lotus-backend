@@ -128,7 +128,7 @@
                                     '' => 'Please Select',
                                     'Ayam' => 'Ayam',
                                     'Sapi' => 'Sapi',
-                                    'Ikan' => 'Ikan',
+                                    'Ikan' => 'Seafood',
                                     'Sayur' => 'Sayur',
                                 ];
 

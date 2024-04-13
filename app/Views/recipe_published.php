@@ -55,7 +55,7 @@
                         '' => 'Please Select',
                         'Ayam' => 'Ayam',
                         'Sapi' => 'Sapi',
-                        'Ikan' => 'Ikan',
+                        'Ikan' => 'Seafood',
                         'Sayur' => 'Sayur',
                     ];
                     echo form_dropdown('key_food', $options, $r->key_food, ['class' => 'form-control input-dd', 'recipe_id' => $r->id, 'category' => 'key_food']);
