@@ -13,6 +13,13 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(function() {
+            $('.original-form, .published-form').on("keypress", function(e) {
+                if ((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey) {
+                    $(this).submit();
+                }
+            });
+
+
             $('.input-dd').change(function() {
                 var el = $(this).closest('tr');
                 $.ajax({

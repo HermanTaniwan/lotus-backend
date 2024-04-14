@@ -78,5 +78,10 @@
             line-height: 1;
             text-align: center;
         }
+
+        .tokenfield .token .close {
+            text-decoration: none;
+            color: #333;
+        }
     </style>
 </head>

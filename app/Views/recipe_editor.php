@@ -17,7 +17,7 @@
             <br>
             <div class="row">
                 <div class=" card p-3 col-5 ">
-                    <form action="<?= base_url() . 'recipe-youtube-submit' ?>" method="post" accept-charset="utf-8">
+                    <form class="original-form" action="<?= base_url() . 'recipe-youtube-submit' ?>" method="post" accept-charset="utf-8">
                         <input type="hidden" name="video_id" value="<?= $published->video_id ?>" class="form-control btn btn-primary" />
                         <h3>ORIGINAL</h3>
                         <br>
@@ -55,7 +55,7 @@
 
 
                 <div class=" card p-3 col-5 m-1">
-                    <form action="<?= base_url() . 'recipe-submit' ?>" method="post" accept-charset="utf-8">
+                    <form class="published-form" action="<?= base_url() . 'recipe-submit' ?>" method="post" accept-charset="utf-8">
                         <input type="hidden" name="artist_id" value="<?= $published->artist_id ?>" />
                         <input type="hidden" name="video_id" value="<?= $published->video_id ?>" class="form-control btn btn-primary" />
                         <div class="row">
