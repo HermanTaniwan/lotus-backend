@@ -211,4 +211,9 @@ class RecipeLibraryController extends BaseController
         $data['result'] = $result;
         return view('recipe_published', $data);
     }
+
+    public function loadTikTok()
+    {
+        return view('tiktok_template');
+    }
 }
