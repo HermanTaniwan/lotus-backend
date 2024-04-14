@@ -12,11 +12,11 @@
         height: 786px;
         border: 0; */
 
-        -ms-transform: scale(1.5);
-        -moz-transform: scale(1.5);
-        -o-transform: scale(1.5);
-        -webkit-transform: scale(1.5);
-        transform: scale(1.5);
+        -ms-transform: scale(1.0);
+        -moz-transform: scale(1.0);
+        -o-transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
 
         -ms-transform-origin: 0 0;
         -moz-transform-origin: 0 0;
