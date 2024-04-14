@@ -93,7 +93,7 @@
                                     'horizontal' => 'horizontal',
                                     'vertical' => 'vertical',
                                 ];
-                                echo form_dropdown('aspect_ratio', $options, $published->aspect_ratio, ['class' => 'form-control input-dd', 'recipe_id' => $published->id, 'category' => 'aspect_ratio']);
+                                echo form_dropdown('aspect_ratio', $options, $published->aspect_ratio, ['class' => 'form-control input-dd', 'recipe_id' => "$published->id", 'category' => 'aspect_ratio']);
 
                                 ?>
                             </div>
