@@ -9,9 +9,10 @@
             <table class="table">
                 <thead>
                     <th class="col-1">id</th>
-                    <th class="col-2">name</th>
-                    <th class="col-3">ingredients</th>
-                    <th class="col-3">tags</th>
+                    <th class="col-1">name</th>
+                    <th class="col-2">ingredients</th>
+                    <th class="col-1">aspect_ratio</th>
+                    <th class="col-2">tags</th>
                     <th class="col-1">preparation</th>
                     <th class="col-1">artist_id</th>
                     <th class="col-1">scraped</th>
@@ -58,6 +59,15 @@
                     // ];
                     // echo form_dropdown('key_food', $options, $r->key_food, ['class' => 'form-control input-dd', 'recipe_id' => $r->id, 'category' => 'key_food']);
                     // echo "</td>";
+                    echo "<td>";
+                    helper('form');
+                    $options = [
+                        '' => 'Please Select',
+                        'horizontal' => 'horizontal',
+                        'vertical' => 'vertical',
+                    ];
+                    echo form_dropdown('aspect_ratio', $options, $r->aspect_ratio, ['class' => 'form-control input-dd', 'recipe_id' => $r->id, 'category' => 'aspect_ratio']);
+                    echo "</td>";
                     echo "<td>";
                     echo '<input type="text" class="form-control tags-tokenfield" name="ingredients" recipe_id="' . $r->id . '" value="' . $r->tags . '" />';
                     echo "</td>";

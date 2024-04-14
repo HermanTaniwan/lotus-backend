@@ -136,12 +136,12 @@
                     var el = $(this).closest('tr');
 
                     $.ajax({
-                        url: "<?= base_url(); ?>update-recipe-tags",
+                        url: "<?= base_url(); ?>update-recipe",
                         type: "POST",
                         data: {
                             "id": $(this).attr('recipe_id'),
                             "data": {
-                                "category": $(this).attr('category'),
+                                "category": 'tags',
                                 "value": $(this).val()
                             }
                         },

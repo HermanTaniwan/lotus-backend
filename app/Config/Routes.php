@@ -18,5 +18,5 @@ $routes->get('/recipe-editor', 'RecipeLibraryController::loadEditor');
 $routes->get('/recipe-published', 'RecipeLibraryController::getPublishedRecipe');
 $routes->post('/recipe-submit', 'RecipeLibraryController::submitRecipe');
 $routes->post('/recipe-youtube-submit', 'RecipeLibraryController::submitRecipeYT');
-$routes->post('/update-recipe-tags', 'RecipeLibraryController::updateRecipeTags');
+$routes->post('/update-recipe', 'RecipeLibraryController::updateRecipe');
 $routes->get('/tiktok', 'RecipeLibraryController::loadTikTok');

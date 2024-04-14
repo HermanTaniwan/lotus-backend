@@ -86,9 +86,7 @@ class RecipeLibraryController extends BaseController
         if ($result == null) {
             $data['published']->name = $data['original']->title;
             $data['published']->instructions = $data['original']->description;
-            $data['published']->region = '';
-            $data['published']->type = '';
-            $data['published']->key_food = '';
+            $data['published']->aspect_ratio = '';
             $data['published']->preparation = '';
             $data['published']->tags = '';
             $data['published']->ingredients = '';
@@ -109,12 +107,13 @@ class RecipeLibraryController extends BaseController
         $request = \Config\Services::request();
         $submitted = $request->getPost();
 
-        $sql = 'INSERT INTO recipe (video_id, name, instructions,tags,ingredients,artist_id)
+        $sql = 'INSERT INTO recipe (video_id, name, instructions, aspect_ratio, tags,ingredients,artist_id)
         VALUES (?, ?, ?, ?, ? ,?)
         ON DUPLICATE KEY UPDATE 
             video_id=VALUES(video_id),
             name=VALUES(name), 
             instructions=VALUES(instructions), 
+            aspect_ratio=VALUES(aspect_ratio), 
             tags=VALUES(tags),
             ingredients=VALUES(ingredients),
             artist_id=VALUE(artist_id)';
@@ -124,6 +123,7 @@ class RecipeLibraryController extends BaseController
             $submitted['video_id'],
             $submitted['name'],
             $submitted['instructions'],
+            $submitted['aspect_ratio'],
             $submitted['tags'],
             $submitted['ingredients'],
             $submitted['artist_id'],
@@ -135,7 +135,9 @@ class RecipeLibraryController extends BaseController
         return redirect()->to('recipe-editor?video_id=' . $submitted['video_id']);
     }
 
-    public function updateRecipeTags()
+
+
+    public function updateRecipe()
     {
         try {
             $request = \Config\Services::request();
@@ -144,7 +146,7 @@ class RecipeLibraryController extends BaseController
 
             $db = \Config\Database::connect();
             $builder = $db->table('recipe');
-            $builder->set("tags", $submitted['data']['value']);
+            $builder->set($submitted['data']['category'], $submitted['data']['value']);
             $builder->where('id', $submitted['id']);
             $builder->update();
             $response_array['status'] = 'success';
