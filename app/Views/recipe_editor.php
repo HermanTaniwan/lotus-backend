@@ -39,7 +39,7 @@
                         <div class="form-group row">
                             <label for="inputDescription" class="col-sm-2 col-form-label">Video References</label>
                             <div class="col-sm-10">
-                                <iframe width="100%" height="315" allow="fullscreen;" src="https://www.youtube.com/embed/<?= $original->video_id ?>">
+                                <iframe width="100%" height="315" allow="fullscreen" src="https://www.youtube.com/embed/<?= $original->video_id ?>">
                                 </iframe>
                             </div>
                         </div>
