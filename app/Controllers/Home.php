@@ -73,6 +73,10 @@ class Home extends BaseController
 
         switch ($duration) {
             case 'cepat':
+                $builder->where('youtube.content_duration <', '00:02:00');
+                break;
+            case 'normal':
+                $builder->where('youtube.content_duration >', '00:02:00');
                 $builder->where('youtube.content_duration <', '00:05:00');
                 break;
             case 'sedang':

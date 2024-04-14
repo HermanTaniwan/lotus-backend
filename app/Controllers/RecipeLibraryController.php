@@ -197,7 +197,7 @@ class RecipeLibraryController extends BaseController
     {
         $country = ['Indonesia', 'Chinese', 'Jepang', 'Korea', 'Barat', 'India', 'Thai'];
         $types = ['Goreng', 'Rebus', 'Bakar'];
-        $olahan = ['Ayam', 'Sapi', 'Kambing', 'Seafood', 'Sayur'];
+        $olahan = ['Ayam', 'Sapi', 'Kambing', 'Seafood', 'Sayur', 'Nasi', 'Mie'];
         echo json_encode(array_merge($country, $types, $olahan));
         exit();
     }
