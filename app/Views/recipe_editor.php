@@ -84,6 +84,22 @@
                         </div>
                         <br>
                         <div class="form-group row">
+                            <label for="inputDescription" class="col-sm-2 col-form-label">Summarized Description</label>
+                            <div class="col-sm-10">
+                                <?php
+                                helper('form');
+                                $options = [
+                                    '' => 'Please Select',
+                                    'horizontal' => 'horizontal',
+                                    'vertical' => 'vertical',
+                                ];
+                                echo form_dropdown('aspect_ratio', $options, $published->aspect_ratio, ['class' => 'form-control input-dd', 'recipe_id' => $published->id, 'category' => 'aspect_ratio']);
+
+                                ?>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row">
                             <label for="inputTags" class="col-sm-2 col-form-label">Tags</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control tags-tokenfield" name="tags" recipe_id="<?= $published->video_id ?>" value="<?= $published->tags ?>" />

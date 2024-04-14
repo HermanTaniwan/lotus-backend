@@ -108,7 +108,7 @@ class RecipeLibraryController extends BaseController
         $submitted = $request->getPost();
 
         $sql = 'INSERT INTO recipe (video_id, name, instructions, aspect_ratio, tags,ingredients,artist_id)
-        VALUES (?, ?, ?, ?, ? ,?)
+        VALUES (?, ?, ?, ?, ?, ? ,?)
         ON DUPLICATE KEY UPDATE 
             video_id=VALUES(video_id),
             name=VALUES(name), 
