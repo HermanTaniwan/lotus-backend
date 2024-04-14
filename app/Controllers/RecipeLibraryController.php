@@ -38,7 +38,7 @@ class RecipeLibraryController extends BaseController
         $builder->select('*');
         $builder->where(['artist_id' => $artist_id]);
         $builder->where('description !=""', NULL, FALSE);
-        $builder->where('content_duration >time("00:01:00")', NULL, FALSE);
+        $builder->where('content_duration >time("00:02:00")', NULL, FALSE);
         $total   = $builder->countAllResults(false);
         $page    = (int) ($this->request->getGet('page') ?? 1);
         $perPage = 10;
@@ -52,8 +52,8 @@ class RecipeLibraryController extends BaseController
         $builder->select('youtube.*,IF(recipe.video_id IS NULL,"no","yes")  as "published"');
         $builder->join('recipe', 'recipe.video_id = youtube.video_id', 'left');
         $builder->where(['youtube.artist_id' => $artist_id]);
-        $builder->where('description !=""', NULL, FALSE);
-        $builder->where('content_duration >time("00:02:00")', NULL, FALSE);
+        // $builder->where('description !=""', NULL, FALSE);
+        // $builder->where('content_duration >time("00:02:00")', NULL, FALSE);
 
         $result = $builder->get($perPage, ($page - 1) * $perPage)->getResult();
         $data['result'] = $result;

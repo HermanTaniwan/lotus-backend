@@ -86,7 +86,7 @@
                         <div class="form-group row">
                             <label for="inputTags" class="col-sm-2 col-form-label">Tags</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control tags-tokenfield" name="tags" recipe_id="<?= $published->id ?>" value="<?= $published->tags ?>" />
+                                <input type="text" class="form-control tags-tokenfield" name="tags" recipe_id="<?= $published->video_id ?>" value="<?= $published->tags ?>" />
                             </div>
                         </div>
                         <br>
