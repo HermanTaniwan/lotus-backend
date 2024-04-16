@@ -46,6 +46,7 @@ class Home extends BaseController
         $tags = $request->getGet('tags');
         $page = $request->getGet('page');
         $limit = $request->getGet('limit');
+        $random = $request->getGet('random');
         $offset = intval($page) * intval($limit);
 
 
@@ -88,9 +89,12 @@ class Home extends BaseController
                 break;
         }
 
+        //IF BOTH INGREDIENTS AND KEYWORDS ARE EMPTY
         if ($matchQuery != "") {
             $builder->where($matchQuery);
             $builder->orderBy($matchQuery, 'DESC');
+        } else if ($random == 1) {
+            $builder->orderBy('RAND()');
         } else {
             $builder->orderBy('recipe.id', 'DESC');
         }
