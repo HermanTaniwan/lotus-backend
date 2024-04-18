@@ -93,11 +93,13 @@ class Home extends BaseController
         if ($matchQuery != "") {
             $builder->where($matchQuery);
             $builder->orderBy($matchQuery, 'DESC');
+            $builder->orderBy("rand_id", 'DESC');
         } else if ($random == 1) {
             $builder->orderBy('RAND()');
         } else {
-            $builder->orderBy('recipe.id', 'DESC');
+            $builder->orderBy("rand_id", 'DESC');
         }
+
 
         // var_dump($builder->getCompiledSelect());
         // die();

@@ -107,10 +107,11 @@ class RecipeLibraryController extends BaseController
         $request = \Config\Services::request();
         $submitted = $request->getPost();
 
-        $sql = 'INSERT INTO recipe (video_id, name, instructions, aspect_ratio, tags,ingredients,artist_id)
+        $sql = 'INSERT INTO recipe (video_id, rand_id, name, instructions, aspect_ratio, tags,ingredients,artist_id)
         VALUES (?, ?, ?, ?, ?, ? ,?)
         ON DUPLICATE KEY UPDATE 
             video_id=VALUES(video_id),
+            rand_id="rand()",
             name=VALUES(name), 
             instructions=VALUES(instructions), 
             aspect_ratio=VALUES(aspect_ratio), 
