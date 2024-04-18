@@ -9,8 +9,10 @@
             <table class="table">
                 <thead>
                     <th>id</th>
-                    <th class="col-2">original name</th>
-                    <th class="col-1">search</th>
+                    <th class="col-1">creator</th>
+                    <th class="col-1">original name</th>
+                    <th class="col-1">search alias</th>
+                    <th class="col-1">description</th>
                     <th class="col-2">ingredients</th>
                     <th class="col-1">aspect_ratio</th>
                     <th class="col-2">tags</th>
@@ -21,8 +23,10 @@
                 <?php foreach ($result as $r) {
                     echo "<tr>";
                     echo "<td class='the-id'> {$r->id}</td>";
+                    echo "<td class='the-id'> {$r->artist}</td>";
                     echo "<td> {$r->title}</td>";
                     echo "<td> <a href=' " . base_url() . "recipe-editor?video_id=" . $r->video_id . "' target='_blank'>{$r->name}</a></td>";
+                    echo "<td> <div class='list-ingredient'>{$r->description}</div></td>";
                     echo "<td> <div class='list-ingredient'>{$r->ingredients}</div></td>";
                     // echo "<td>";
                     // helper('form');

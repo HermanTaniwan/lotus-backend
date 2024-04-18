@@ -206,8 +206,9 @@ class RecipeLibraryController extends BaseController
     {
         $db = \Config\Database::connect();
         $builder = $db->table('recipe');
-        $builder->select('recipe.*, youtube.title, youtube.video_id as yt_video_id');
+        $builder->select('recipe.*, youtube.title, artist.name as artist, CONCAT(LEFT(youtube.description, 40),"...") as description, youtube.video_id as yt_video_id');
         $builder->join('youtube', 'recipe.video_id = youtube.video_id', 'left');
+        $builder->join('artist', 'recipe.artist_id = artist.id', 'left');
         $builder->orderBy('timestamp', 'DESC');
         $result = $builder->get()->getResult();
         $data['result'] = $result;
