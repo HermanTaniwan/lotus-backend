@@ -17,7 +17,6 @@
                     <th class="col-1">preparation</th>
                     <th class="col-1">artist_id</th>
                     <th class="col-1">scraped</th>
-                    <th></th>
                 </thead>
                 <?php foreach ($result as $r) {
                     echo "<tr>";
@@ -76,7 +75,6 @@
                     echo "<td> {$r->preparation}</td>";
                     echo "<td> {$r->artist_id}</td>";
                     echo "<td> <h5><span class='badge " . ($r->yt_video_id != null ? 'bg-success' : 'bg-danger') . "'> &nbsp;&nbsp;&nbsp;&nbsp;</span></h5></td>";
-                    echo "<td> <a href='http://www.youtube.com/watch?v='" . $r->video_id . "_target='_blank' >See Videos</a>";
                     echo "</tr>";
                 } ?>
 
