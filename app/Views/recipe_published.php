@@ -9,7 +9,7 @@
             <table class="table">
                 <thead>
                     <th>id</th>
-                    <th class="col-1">original name</th>
+                    <th class="col-2">original name</th>
                     <th class="col-1">search</th>
                     <th class="col-2">ingredients</th>
                     <th class="col-1">aspect_ratio</th>
