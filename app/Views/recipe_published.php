@@ -65,17 +65,20 @@
                     // echo form_dropdown('key_food', $options, $r->key_food, ['class' => 'form-control input-dd', 'recipe_id' => $r->id, 'category' => 'key_food']);
                     // echo "</td>";
                     echo "<td>";
-                    helper('form');
-                    $options = [
-                        '' => 'Please Select',
-                        'horizontal' => 'horizontal',
-                        'vertical' => 'vertical',
-                    ];
-                    echo form_dropdown('aspect_ratio', $options, $r->aspect_ratio, ['class' => 'form-control input-dd', 'recipe_id' => $r->id, 'category' => 'aspect_ratio']);
-                    echo "</td>";
-                    echo "<td>";
-                    echo '<input type="text" class="form-control tags-tokenfield" name="ingredients" recipe_id="' . $r->id . '" value="' . $r->tags . '" />';
-                    echo "</td>";
+                    if (isset($r->aspect_ratio)) {
+                        helper('form');
+                        $options = [
+                            '' => 'Please Select',
+                            'horizontal' => 'horizontal',
+                            'vertical' => 'vertical',
+                        ];
+
+                        echo form_dropdown('aspect_ratio', $options, $r->aspect_ratio, ['class' => 'form-control input-dd', 'recipe_id' => $r->id, 'category' => 'aspect_ratio']);
+                        echo "</td>";
+                        echo "<td>";
+                        echo '<input type="text" class="form-control tags-tokenfield" name="ingredients" recipe_id="' . $r->id . '" value="' . $r->tags . '" />';
+                        echo "</td>";
+                    }
                     echo "<td> {$r->preparation}</td>";
                     echo "<td> {$r->artist_id}</td>";
                     echo "<td> <h5><span class='badge " . ($r->yt_video_id != null ? 'bg-success' : 'bg-danger') . "'> &nbsp;&nbsp;&nbsp;&nbsp;</span></h5></td>";
