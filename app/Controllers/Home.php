@@ -12,6 +12,12 @@ class Home extends BaseController
         throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
     }
 
+    public function spreadsheet(): string
+    {
+        echo "spreadsheet from quarks";
+        exit;
+    }
+
     public function loadIngredients()
     {
         $db = \Config\Database::connect();
